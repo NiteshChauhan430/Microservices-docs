@@ -1,0 +1,49 @@
+A microservice is an engineering approach focused on decomposing applications into single-function modules with well-defined interfaces
+which are independently deployed and operated by small teams who own the entire lifecycle of the service.
+“Microservices, in a nutshell, allows us to break our large system into a number of independent collaborating components.”
+
+Spring Cloud — which builds on top of Spring Boot, provides a set of features to quickly build microservices.
+It’s very smart to know how to get them working together, can quickly setup services, with minimal configurations.
+Things like service registration and discovery, circuit breakers, proxies, logging and log tracking, monitoring, authentication, etc.
+
+Decomposing
+So, instead of having one large application, we decompose it into separate, different, mini-applications (services).
+
+class UserApp {
+  User getUser() {
+     // 1. auth user
+     // 2. get user data
+     // 3. log user actions
+   }
+}
+class UserApp {
+  void authUser(User user) { ... }
+  User getUserData() { ... }
+  void logUserActions() { ... }
+}
+
+Independent
+Independent means services don’t know about each other implementation. They can get tested, deployed, and maintained
+independently.
+
+class UserApp {
+  void authUser(User user) {
+    // log user login action (success or failure) 
+    // using logUserActions
+  }
+  User getUserData() { ... }
+  void logUserActions() { ... }
+}
+
+The scope and risk of change
+Services should be changed without breaking other services. And so long as we don’t change the external interface there will be no problem for other services.
+As a result of changes, the versions of services are updating individually, and there is no relationship between them.
+
+Monolithic Vs Microservices
+The choice between the two approaches depends on the context, and complexity of the application.
+Indeed microservices solves problems occurs in the large application from scaling, managing, but it’s not always the way to go.
+It is important to remember that microservices might be used in contexts where they are not meant to be used, resulting in extra effort and cost, project failures.
+Most of the problems in Microservices are inherited as a result of having separate components.
+
+For example, communication between methods in monolithic is much faster when compared to services asycnrousns communications,
+which slower, harder to debug, and must be secured.
